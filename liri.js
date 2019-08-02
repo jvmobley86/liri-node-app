@@ -5,6 +5,7 @@ var keys = require("./keys.js");
 var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 var userInput = process.argv.slice(3).join(' ')
+var bandsInTown = "https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=1";
     
 
 if(command === 'spotify-this-song'){
