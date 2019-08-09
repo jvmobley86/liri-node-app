@@ -12,24 +12,21 @@ var moment = require ('moment');
 if(command === 'spotify-this-song'){
     if(userInput === ''){
         userInput = "the sign by ace of base"
-        spotifySong(userInput)  
     }
     spotifySong(userInput)  
                   
-    }
+}
 if(command === 'movie-this'){
     if(userInput===''){
         userInput = "Mr. Nobody"
-        movieThis(userInput)
     }
-movieThis(userInput)
+    movieThis(userInput)
 }
 if(command === 'concert-this'){
     if(userInput===''){
         userInput = "Erykah Badu"
-        bandsInTown(userInput)
     }
-bandsInTown(userInput)
+    bandsInTown(userInput)
 }
 if(command === 'do-what-it-says'){
     fs.readFile("random.txt", "utf8", function (err, data) {
@@ -48,8 +45,8 @@ if(command === 'do-what-it-says'){
                 break;
         
         }
-    })}
-
+    });
+}
 function spotifySong(songName){
     spotify.search({ type: 'track', query: songName}, function (err, data) {
         if (err) {
@@ -60,7 +57,8 @@ function spotifySong(songName){
         console.log('Albumn Name: ' + data.tracks.items[0].album.name);
         console.log('Artist Name: ' + data.tracks.items[0].artists[0].name);
         console.log('Preview Link: ' + data.tracks.items[0].external_urls.spotify);
-    },
+    });
+}
 
 function movieThis(movieName){
        var queryURL = "https://www.omdbapi.com/?t=" + movieName+ "&apikey=trilogy";
@@ -84,17 +82,18 @@ function movieThis(movieName){
             console.log(error);
         })
 
-})
+}
 function bandsInTown(bands){
-var bandsInTownAPI = "https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp";
-axios.get(bandsInTownAPI)
-    .then(function (response) {
-        console.log("Artist: " + userInput);
-        console.log("Venue: " + response.data[0].venue.name);
-        console.log("Location: " + response.data[0].venue.city);
-        console.log("Date: " + moment(response.data[0].datetime).format('MM/DD/YYYY'));
-    })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })}}
+    var bandsInTownAPI = "https://rest.bandsintown.com/artists/" + userInput + "/events?app_id=codingbootcamp";
+    axios.get(bandsInTownAPI)
+        .then(function (response) {
+            console.log("Artist: " + userInput);
+            console.log("Venue: " + response.data[0].venue.name);
+            console.log("Location: " + response.data[0].venue.city);
+            console.log("Date: " + moment(response.data[0].datetime).format('MM/DD/YYYY'));
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+}
